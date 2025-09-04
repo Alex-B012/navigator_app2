@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import "./yandexMap.css";
-import LocationMarker from "../../components/LocationMarker/LocationMarker";
+import LocationMarker from "./LocationMarker/LocationMarker";
 import RotationBtns from "./RotationBtns/RotationBtns";
 import PlacemarksCountInfo from "./PlacemarksCountInfo/PlacemarksCountInfo";
 

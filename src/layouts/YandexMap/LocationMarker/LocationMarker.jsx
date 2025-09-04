@@ -1,4 +1,4 @@
-import { icons } from "../../assets/assets";
+import { icons } from "../../../assets/assets";
 import "./locationMarker.css";
 
 function LocationMarker() {

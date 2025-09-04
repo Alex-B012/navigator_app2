@@ -1,0 +1,11 @@
+header {
+   grid-area: header;
+   width: 100%;
+   min-height: 100px;
+   font-weight: 800;
+   font-size: 1.5rem;
+   padding: 2rem 0;
+   color: rgb(18, 1, 94);
+   text-transform: uppercase;
+   text-align: center;
+}

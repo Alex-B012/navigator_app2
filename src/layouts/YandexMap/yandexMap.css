@@ -1,0 +1,61 @@
+:root {
+   --darkFrame-color: #140642;
+   --lightFrame-color: #290d85;
+}
+
+.mapFrame {
+   width: 100%;
+   height: 600px;
+   overflow: hidden;
+   position: relative;
+   padding: 30px;
+}
+
+.mapFrame__top, .mapFrame__bottom, .mapFrame__right, .mapFrame__left {
+   position: absolute;
+   background-color: red;
+   z-index: 10;
+}
+
+.mapFrame__top, .mapFrame__bottom {
+   width: 100%;
+   height: 30px;
+   top: 0;
+   left: 0;
+   background: linear-gradient(90deg, var(--darkFrame-color) 0%, var(--darkFrame-color) 10%, var(--lightFrame-color) 90%, var(--lightFrame-color) 100%);
+}
+
+.mapFrame__bottom {
+   top: 570px;
+}
+
+.mapFrame__right, .mapFrame__left {
+   width: 30px;
+   height: 570px;
+   top: 0;
+}
+
+.mapFrame__left {
+   left: 0;
+   background-color: var(--darkFrame-color);
+}
+
+.mapFrame__right {
+   right: 0;
+   background-color: var(--lightFrame-color);
+}
+
+
+
+#placemarksCount_id {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 50px;
+   font-weight: bold;
+}
+
+#placemarksCount_id span {
+   color: var(--lightFrame-color);
+   margin-left: 10px;
+}

@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import "./yandexMap.css";
+import LocationMarker from "../../components/LocationMarker/LocationMarker";
+import RotationBtns from "./RotationBtns/RotationBtns";
+import PlacemarksCountInfo from "./PlacemarksCountInfo/PlacemarksCountInfo";
 
 const YandexMap = () => {
   const placemarksRef = useRef([]);
   const linesRef = useRef([]);
   const mapRef = useRef(null);
   const [placemarksCount, setPlacemarksCount] = useState(0);
+  const [rotationDegree, setRotationDegree] = useState(0);
   const MAX_PLACEMARKS = 15;
 
   // Compare coordinates
@@ -154,7 +158,7 @@ const YandexMap = () => {
               const initialPlacemark = new window.ymaps.Placemark(
                 initialCoords,
                 {
-                  hintContent: "Первая точка (нельзя удалить)",
+                  hintContent: "First placemark",
                 }
               );
               newMap.geoObjects.add(initialPlacemark);
@@ -165,20 +169,37 @@ const YandexMap = () => {
               newMap.events.add("click", handleClick);
             });
           } else {
-            console.error("Ошибка: window.ymaps не определён.");
+            console.error("Error: window.ymaps is not defined.");
           }
         };
 
         script.onerror = () => {
-          console.error("Ошибка загрузки скрипта Яндекс.Карт");
+          console.error("Error: Yandex.Maps script loading issue");
         };
 
         document.head.appendChild(script);
       }
     } else {
-      console.error("API ключ не найден!");
+      console.error("API key not found!");
     }
   }, [handleClick]);
+
+  // Rotate map
+  const changeDegree = useCallback((num) => {
+    const angle = 15;
+
+    setRotationDegree((prev) => {
+      let newValue = prev + num * angle;
+
+      if (newValue >= 360) {
+        return newValue - 360;
+      } else if (newValue < 0) {
+        return newValue + 360;
+      } else {
+        return newValue;
+      }
+    });
+  }, []);
 
   return (
     <div>
@@ -187,10 +208,19 @@ const YandexMap = () => {
         <div className="mapFrame__right"></div>
         <div className="mapFrame__bottom"></div>
         <div className="mapFrame__left"></div>
-        <div id="map" style={{ width: "100%", height: "1000px" }} />
+        <div
+          id="map"
+          style={{
+            width: "2500px",
+            height: "2500px",
+            transform: `rotate(${rotationDegree * -1}deg)`,
+          }}
+        />
+        <LocationMarker />
       </div>
-      <div id="placemarksCount_id">
-        {`Number of placemarks:  `} <span>{` ${placemarksCount}`}</span>
+      <div className="mapBottom">
+        <PlacemarksCountInfo number={placemarksCount} />
+        <RotationBtns degree={rotationDegree} rotateMap={changeDegree} />
       </div>
     </div>
   );

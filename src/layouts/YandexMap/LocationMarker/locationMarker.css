@@ -1,0 +1,14 @@
+.locationMarker {
+   width: 100%;
+   position: absolute;
+   left: 0;
+   bottom: 62px;
+   text-align: center;
+   z-index: 11;
+}
+
+.locationMarker__img {
+   width: 93px;
+   height: 93px;
+   transform: rotate(-45deg);
+}
